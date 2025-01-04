@@ -29,6 +29,35 @@ class SaeConfig(Serializable):
 
 
 @dataclass
+class MpnetConfig(Serializable):
+    """Configuration for training a MPNet on a language model."""
+
+    expansion_factor: int = 32
+    """Multiple of the input dimension to use as the SAE dimension."""
+
+    normalize_decoder: bool = True
+    """Normalize the decoder weights to have unit norm."""
+
+    num_latents: int = 0
+    """Number of latents to use. If 0, use `expansion_factor`."""
+
+    k: int = 32
+    """Number of nonzero features."""
+
+    multi_topk: bool = False
+    """Use Multi-TopK loss."""
+
+    skip_connection: bool = False
+    """Include a linear skip connection."""
+
+    tie_encoder_decoder: bool = False
+    """Tie the encoder and decoder weights."""
+
+    tie_iterations: bool = True
+    """Tie the weights across iterations."""
+
+
+@dataclass
 class TrainConfig(Serializable):
     sae: SaeConfig
 
