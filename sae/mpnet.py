@@ -178,7 +178,8 @@ class MPNet(nn.Module):
         
         for i in range(self.cfg.k):
             # Encode
-            top_act, top_indice = x.topk(k=1, sorted=False)
+            z = self.encoder(residual)
+            top_act, top_indice = z.topk(k=1, sorted=False)
             top_act = nn.functional.relu(top_act)  # Apply post-TopK activation
 
             accumulated_acts.append(top_act)
